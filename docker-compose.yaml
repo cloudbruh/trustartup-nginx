@@ -5,6 +5,11 @@ services:
       - "host.docker.internal:host-gateway"
     ports:
       - "8080:80"
+    depends_on:
+      - auth-system
+      - business-logic
+      - feed-logic
+      - media-response
   feed-content:
     image: trustartup.azurecr.io/feedcontent
     environment: 
@@ -12,6 +17,8 @@ services:
       - ConnectionStrings__Database=host=feed-content-db;database=postgres;user id=postgres;password=postgres;
     ports:
       - "8081:80"
+    depends_on:
+      - feed-content-db
   feed-content-db:
     image: "postgres:14.1-alpine"
     environment:
@@ -27,6 +34,8 @@ services:
       - media:/app/media
     ports:
       - "8083:80"
+    depends_on:
+      - media-system-db
   media-system-db:
     image: "postgres:14.1-alpine"
     environment:
@@ -135,6 +144,8 @@ services:
     command: [ "/bin/sh", "-c", "php -S 0.0.0.0:80 -t public" ]
     ports:
       - "8087:80"
+    depends_on:
+      - user-system
   feed-logic:
     image: trustartup.azurecr.io/feedlogic
     extra_hosts:
@@ -147,6 +158,10 @@ services:
       - Settings__UserSystemUrl=http://user-system
     ports:
       - "8088:80"
+    depends_on:
+      - feed-content
+      - user-system
+      - media-system
   media-response:
     image: trustartup.azurecr.io/mediaresponse
     extra_hosts:
@@ -157,6 +172,8 @@ services:
       - Settings__MediaSystemUrl=http://media-system
     ports:
       - "8089:80"
+    depends_on:
+      - media-system
   business-logic:
     image: trustartup.azurecr.io/businesslogic
     extra_hosts:
@@ -172,6 +189,11 @@ services:
     command: [ "/bin/sh", "-c", "php -S 0.0.0.0:80 -t public" ]
     ports:
       - "8090:80"
+    depends_on:
+      - user-system
+      - business-content
+      - media-system
+      - feed-content
   payment-system:
     image: trustartup.azurecr.io/paymentsystem
     environment: 
