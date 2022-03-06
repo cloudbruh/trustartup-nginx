@@ -16,6 +16,8 @@ services:
     image: "postgres:14.1-alpine"
     environment:
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - feed-content-db:/var/lib/postgresql/data
   media-system:
     image: trustartup.azurecr.io/mediasystem
     environment:
@@ -29,6 +31,8 @@ services:
     image: "postgres:14.1-alpine"
     environment:
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - media-system-db:/var/lib/postgresql/data
   business-content:
     image: trustartup.azurecr.io/businesscontent
     environment: 
@@ -50,6 +54,8 @@ services:
     image: "postgres:14.1-alpine"
     environment:
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - business-content-db:/var/lib/postgresql/data
   user-system:
     image: trustartup.azurecr.io/usersystem
     environment: 
@@ -71,6 +77,8 @@ services:
     image: "postgres:14.1-alpine"
     environment:
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - user-system-db:/var/lib/postgresql/data
   rating-calculation-system:
     image: trustartup.azurecr.io/ratingcalculationsystem
     ports:
@@ -185,6 +193,13 @@ services:
     image: "postgres:14.1-alpine"
     environment:
       - POSTGRES_PASSWORD=postgres
+    volumes:
+      - payment-system-db:/var/lib/postgresql/data
 
 volumes: 
   media:
+  feed-content-db:
+  media-system-db:
+  business-content-db:
+  user-system-db:
+  payment-system-db:
