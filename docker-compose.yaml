@@ -186,6 +186,7 @@ services:
       - API_FEED_CONTENT=http://feed-content
       - API_MEDIA=http://media-system
       - API_USER=http://user-system
+      - API_PAYMENT=http://payment-system
     command: [ "/bin/sh", "-c", "php -S 0.0.0.0:80 -t public" ]
     ports:
       - "8090:80"
@@ -194,6 +195,7 @@ services:
       - business-content
       - media-system
       - feed-content
+      - payment-system
   payment-system:
     image: trustartup.azurecr.io/paymentsystem
     environment: 
