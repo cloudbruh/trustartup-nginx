@@ -156,12 +156,14 @@ services:
       - Settings__FeedContentSystemUrl=http://feed-content
       - Settings__MediaSystemUrl=http://media-system
       - Settings__UserSystemUrl=http://user-system
+      - Settings__PaymentSystemUrl=http://payment-system
     ports:
       - "8088:80"
     depends_on:
       - feed-content
       - user-system
       - media-system
+      - payment-system
   media-response:
     image: trustartup.azurecr.io/mediaresponse
     extra_hosts:
