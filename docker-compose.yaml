@@ -30,6 +30,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=${ENV:-production}
       - ConnectionStrings__Database=host=media-system-db;database=postgres;user id=postgres;password=postgres;
+      - Storage__Path=/app/media/
     volumes:
       - media:/app/media
     ports:
