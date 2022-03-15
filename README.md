@@ -1,7 +1,7 @@
-<h1 align="center"> Trustartup Business Logic </h1>
+<h1 align="center"> Trustartup Nginx + Docker Compose </h1>
 
 <h3 align="center">
-  Микросервис для проекта Trustartup.
+  Конфигурация NGINX для локального запуска Trustartup.
 </h3>
 
 ## Содержание
@@ -13,7 +13,7 @@
 
 ## Описание
 
-С помощью реверс-прокси nginx и docker compose поднимает бэкенд.
+С помощью реверс-прокси nginx и docker compose поднимает фронтенд и бэкенд.
 
 ## Технологии
 
@@ -25,17 +25,12 @@
 ### Docker
 
 -   [Docker](https://www.docker.com/get-docker)
+-   [Docker Compose](https://docs.docker.com/compose/)
 
-Сначала постройте образ:
-
-```bash
-docker-compose build
-```
-
-Запустите микросервис:
+Запустите приложение:
 
 ```bash
 docker-compose up -d
 ```
 
-По умолчанию сервис запустится на `8080` порте
+По умолчанию приложение запустится на `8080` порте
